@@ -1,8 +1,9 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 
+import NoteEditor from './NoteEditor.jsx';
 import Note from './Note.jsx';
-import './styles/Card.less';
+
 
 import propTypes from 'prop-types';
 
@@ -21,6 +22,8 @@ const collect = (connect, monitor) => {
     isOver: monitor.isOver(),
   };
 }
+
+
 
 class Card extends React.Component {
 
@@ -45,9 +48,10 @@ class Card extends React.Component {
 render() {
   const { connectDropTarget, isOver, xPos, yPos } = this.props;
       return connectDropTarget(
-          <div className='Card'>
+          <div >
               <h1>Card</h1>
               {this.printNotes()}
+               <NoteEditor onNoteAdd={this.props.onNoteAdd}/>
           </div>
       );
 }

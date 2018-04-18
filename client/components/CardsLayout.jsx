@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import './styles/Card.less';
 
 import Card from './Card.jsx';
+import CardCreator from './CardCreator.jsx';
+import NoteEditor from './NoteEditor.jsx';
+
 
 class CardsLayout extends Component {
 
@@ -26,6 +30,7 @@ class CardsLayout extends Component {
           moveSubject={this.props.moveSubject}
           onNoteDelete={this.props.onNoteDelete}
           notes={this.props.notes}
+          onNoteAdd={this.props.onNoteAdd}
         />
     </div>
       );
@@ -34,9 +39,12 @@ class CardsLayout extends Component {
     const { itemsInColumn } = this.props;
 
     return (
-          <div className="sections">
+      <div>
+          <div className='Card'>
             {Array.from({ length: this.props.columns }, (el, index) => this.generateSection(index + 1))}
           </div>
+            <CardCreator onCardAdd={this.props.onCardAdd}/>
+        </div>
     );
   }
 }

@@ -4,8 +4,9 @@ import './styles/App.less';
 
 import NotesStore from '../stores/NotesStore';
 import NotesActions from '../actions/NotesActions';
+import CardsActions from '../actions/CardsActions';
 
-import NoteEditor from './NoteEditor.jsx';
+import CardCreator from './CardCreator.jsx';
 import CardsGrid from './CardsGrid.jsx';
 
 function getStateFromFlux() {
@@ -58,6 +59,10 @@ class App extends React.Component{
        NotesActions.createNote(noteData);
    }
 
+   handleCardAdd(cardData) {
+       CardsActions.createCard(cardData);
+   }
+
 
    /*  <NoteEditor onNoteAdd={this.handleNoteAdd} />
      <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
@@ -67,8 +72,7 @@ render() {
   return (
     <div className='App'>
                 <CardsGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}
-                  moveSubject={this.moveSubject}/>
-              <NoteEditor onNoteAdd={this.handleNoteAdd}/>
+                  moveSubject={this.moveSubject} onCardAdd={this.handleCardAdd} onNoteAdd={this.handleNoteAdd}/>
             </div>
   );
 }

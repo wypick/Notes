@@ -57,7 +57,9 @@ render() {
             columns={1}
             moveSubject={this.props.moveSubject}
             notes={this.props.notes}
-            onNoteDelete={this.props.onNoteDelete}/>
+            onNoteDelete={this.props.onNoteDelete}
+          onCardAdd={this.props.onCardAdd}
+        onNoteAdd={this.props.onNoteAdd}/>
       </div>
       );
 }

@@ -73,17 +73,16 @@ class App extends React.Component{
        CardsActions.createCard(cardData);
    }
 
-
-   /*  <NoteEditor onNoteAdd={this.handleNoteAdd} />
-     <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
-     <CardsGrid />*/
+   handleNoteEdit(note) {
+       NotesActions.updateNote(note.id);
+   }
 
 render() {
   return (
     <div className='App'>
                 <CardsGrid notes={this.state.notes} cards={this.state.cards} onNoteDelete={this.handleNoteDelete}
                   onCardDelete={this.handleCardDelete} moveSubject={this.moveSubject} onCardAdd={this.handleCardAdd}
-                  onNoteAdd={this.handleNoteAdd}/>
+                  onNoteAdd={this.handleNoteAdd} onNoteEdit={this.handleNoteEdit}/>
             </div>
   );
 }

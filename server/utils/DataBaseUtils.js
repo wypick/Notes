@@ -44,6 +44,10 @@ export function deleteNote(id) {
     return Note.findById(id).remove();
 }
 
+export function updateNote(id) {
+    return Note.findByIdAndUpdate(id).update();
+}
+
 export function deleteCard(id) {
     return Card.findById(id).remove();
 }

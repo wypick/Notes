@@ -30,29 +30,70 @@ return {
 }
 
 class Note extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {checked: false, edit: false, txt: this.props.text};
+    this.edit = this.edit.bind(this);
+    this.save = this.save.bind(this);
+    this.update = this.update.bind(this);
+    }
+
+  edit() {
+    this.setState({
+      edit: true
+    });
+  }
+
+  save(){
+    this.setState({
+      edit: false
+    });
+    this.props.onEdit(this.state.txt);
+  }
 
   onTooltipClick(event) {
     event.preventDefault();
     return false;
   }
 
+  update(e){
+    this.setState({
+      txt: e.target.value
+    })
+    render();
+  }
+
+  change() {
+    return (
+      <div className='Note' onClick={this.onTooltipClick}>
+      <input type='text' defaultValue={this.state.txt} onChange = {this.update}/>
+      <button onClick={this.save}>Save</button>
+      </div>
+    );
+  }
+
+  original(){
+    const { connectDragSource, isDragging, index, data} = this.props;
+    return connectDragSource(
+        <div className='Note' onClick={this.onTooltipClick}>
+            <span className='Note__del-icon' onClick={this.props.onDelete}> × </span>
+          <span className='Note__del-icon' onClick={this.edit} > ✏ </span>
+                <div>
+                    <p className='Note__title'>{this.state.txt}</p>
+                </div>
+            <div className='Note__text'>{this.props.children}</div>
+        </div>
+      );
+  }
+
 render() {
   const { connectDragSource, isDragging, index, data} = this.props;
-        return connectDragSource(
-            <div className='Note' onClick={this.onTooltipClick}>
-                <span className='Note__del-icon' onClick={this.props.onDelete}> × </span>
-                {
-                    this.props.title
-                    ?
-                    <div>
-                        <h4 className='Note__title'>{this.props.title}</h4>
-                    </div>
-                    :
-                        null
-                }
-                <div className='Note__text'>{this.props.children}</div>
-            </div>
-          );
+  if (this.state.edit){
+    return this.change();
+  }
+  else {
+    return this.original();
+  }
 }
 }
 

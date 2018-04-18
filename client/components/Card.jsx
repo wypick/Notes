@@ -24,40 +24,91 @@ const collect = (connect, monitor) => {
   };
 }
 
-
-
 class Card extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {checked: false, edit: false, txt: this.props.name};
+    this.edit = this.edit.bind(this);
+    this.save = this.save.bind(this);
+    this.update = this.update.bind(this);
+    }
+
+    edit() {
+      this.setState({
+        edit: true
+      });
+    }
+
+    save(){
+      this.setState({
+        edit: false
+      });
+      this.props.onEdit(this.state.txt);
+    }
+    update(e){
+      this.setState({
+        txt: e.target.value
+      })
+      render();
+    }
+
+    change() {
+      return (
+        <div className='Note' onClick={this.onTooltipClick}>
+        <input type='text' defaultValue={this.state.txt} onChange = {this.update}/>
+        <button onClick={this.save}>Save</button>
+        </div>
+      );
+    }
+
+    original(){
+      const { connectDropTarget, isOver, xPos, yPos, card } = this.props;
+          return connectDropTarget(
+              <div className='Card'>
+                  <h1>{this.props.name}
+                    <button onClick={this.props.onCardDelete}> × </button>
+                    <button onClick={this.props.onCardDelete}> ✏  </button>
+                  </h1>
+                  {this.printNotes()}
+                   <NoteEditor onNoteAdd={this.props.onNoteAdd} card={this.props.card}/>
+              </div>
+          );
+    }
+
+
+  abc(note, index, sectionData){
+    if (this.props.card==note.card){
+      return (
+        <Note
+            key={note._id}
+           moveSubject={this.props.moveSubject}
+            text={note.text}
+            onDelete={this.props.onNoteDelete.bind(null, note)}
+            onEdit={this.props.onNoteEdit.bind(null, note)}
+            color={note.color}
+            index={index}
+            sectionData={sectionData}
+        />
+      );
+    }
+  }
 
   printNotes () {
    return this.props.notes.map((note, index, sectionData) =>
          <tr>
-         <Note
-             key={note._id}
-            moveSubject={this.props.moveSubject}
-             title={note.title}
-             onDelete={this.props.onNoteDelete.bind(null, note)}
-             color={note.color}
-             index={index}
-             sectionData={sectionData}
-         >
-             {note.text}
-         </Note>
+           {this.abc(note, index, sectionData)}
        </tr>
      );
  }
 
 render() {
   const { connectDropTarget, isOver, xPos, yPos, card } = this.props;
-      return connectDropTarget(
-          <div className='Card'>
-              <h1>{this.props.name}
-                <button onClick={this.props.onCardDelete}> × </button>
-              </h1>
-              {this.printNotes()}
-               <NoteEditor onNoteAdd={this.props.onNoteAdd} card={this.props.card}/>
-             {console.log(this.props.card)}
-          </div>
-      );
+  if (this.state.edit){
+    return this.change();
+  }
+  else {
+    return this.original();
+  }
 }
 }
 

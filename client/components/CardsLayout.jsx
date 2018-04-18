@@ -38,7 +38,7 @@ class CardsLayout extends Component {
     }
 
     printCards () {
-     return this.props.cards.map((card, note, index) =>
+     return this.props.cards.map((card, index) =>
       <td>
      <Card
        moveSubject={this.props.moveSubject}
@@ -51,7 +51,8 @@ class CardsLayout extends Component {
        onNoteDelete={this.props.onNoteDelete}
        onCardDelete={this.props.onCardDelete.bind(null, card)}
        onCardAdd={this.props.onCardAdd}
-       onNoteAdd={this.props.onNoteAdd}/>
+       onNoteAdd={this.props.onNoteAdd}
+       onNoteEdit={this.props.onNoteEdit}/>
    </td>
        );
     }
@@ -60,14 +61,10 @@ class CardsLayout extends Component {
     const { itemsInColumn } = this.props;
 
     return (
-      <table>
-          <td>
+      <div>
             {this.printCards()}
-          </td>
-          <td>
             <CardCreator onCardAdd={this.props.onCardAdd}/>
-          </td>
-</table>
+</div>
     );
   }
 }

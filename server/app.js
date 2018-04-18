@@ -39,13 +39,13 @@ app.delete('/notes/:id', (req, res) => {
 });
 
 app.delete('/cards/:id', (req, res) => {
-    db.deleteCard(req.params.id).then(data => res.send(data));
+    db.deleteCard(req.params.id, req.body).then(data => res.send(data));
 });
 
 const server = app.listen(serverPort, function() {
     console.log(`Server is up and running on port ${serverPort}`);
 });
 
-/*app.update('/notes/:id', (req, res) => {
+app.patch('/notes/:id', (req, res) => {
     db.updateNote(req.params.id).then(data => res.send(data));
-});*/
+});

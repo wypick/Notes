@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './styles/CardCreator.less';
+
 class CardCreator extends React.Component {
   constructor(props){
     super(props);
@@ -31,13 +33,15 @@ class CardCreator extends React.Component {
         return (
             <div className='CardCreator'>
                 <textarea
-                    placeholder='Enter card text'
+                    placeholder='Enter card name'
                     rows={5}
+                    className='CardEditor__text'
                     value={this.state.text}
                     onChange={this.handleTextChange}
                 />
-                <div className='NoteEditor__footer'>
+              <div className='CardEditor__footer'>
                     <button
+                      className='CardEditor__button'
                         disabled={!this.state.text}
                         onClick={this.handleCardAdd}
                     >

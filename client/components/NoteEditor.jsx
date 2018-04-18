@@ -5,7 +5,7 @@ import './styles/NoteEditor.less';
 class NoteEditor extends React.Component {
   constructor(props){
     super(props);
-    this.state = {title: '', text: '', color: '#FFFFFF'};
+    this.state = {title: '', text: '', card: this.props.card};
       this.handleNoteAdd = this.handleNoteAdd.bind(this);
       this.handleTextChange = this.handleTextChange.bind(this);
       this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -23,11 +23,11 @@ class NoteEditor extends React.Component {
         const newNote = {
             title: this.state.title,
             text: this.state.text,
-            color: this.state.color
+            card: this.state.card
         };
-
         this.props.onNoteAdd(newNote);
-        this.setState({ text: '', title: '', color: '#FFFFFF' });
+        this.setState({ text: '', title: ''});
+        {console.log(this.state.card)}
     }
 
     render() {

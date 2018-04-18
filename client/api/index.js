@@ -7,6 +7,10 @@ export default {
         return axios.get(`${apiPrefix}/notes`);
     },
 
+    listCards() {
+        return axios.get(`${apiPrefix}/cards`);
+    },
+
     createNote(data) {
         return axios.post(`${apiPrefix}/notes`, data);
     },
@@ -17,5 +21,9 @@ export default {
 
     deleteNote(noteId) {
         return axios.delete(`${apiPrefix}/notes/${noteId}`);
+    },
+
+    deleteCard(cardId) {
+        return axios.delete(`${apiPrefix}/cards/${cardId}`);
     }
 }

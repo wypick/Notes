@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './styles/Card.less';
+
 
 import Card from './Card.jsx';
 import CardCreator from './CardCreator.jsx';
+
 import NoteEditor from './NoteEditor.jsx';
 
 
@@ -10,7 +11,6 @@ class CardsLayout extends Component {
 
   getSectionData (x, y) {
       return this.props.notes.filter(subject => {
-        console.log(y);
         return subject.card == x && subject.number == y;
 
       });
@@ -30,21 +30,44 @@ class CardsLayout extends Component {
           moveSubject={this.props.moveSubject}
           onNoteDelete={this.props.onNoteDelete}
           notes={this.props.notes}
+          cards={this.props.cards}
           onNoteAdd={this.props.onNoteAdd}
         />
     </div>
       );
     }
+
+    printCards () {
+     return this.props.cards.map((card, note, index) =>
+      <td>
+     <Card
+       moveSubject={this.props.moveSubject}
+       xPos={index + 1}
+       key={index}
+       notes={this.props.notes}
+       name={card.name}
+       card={card.id}
+       cards={this.props.cards}
+       onNoteDelete={this.props.onNoteDelete}
+       onCardDelete={this.props.onCardDelete.bind(null, card)}
+       onCardAdd={this.props.onCardAdd}
+       onNoteAdd={this.props.onNoteAdd}/>
+   </td>
+       );
+    }
+
     render() {
     const { itemsInColumn } = this.props;
 
     return (
-      <div>
-          <div className='Card'>
-            {Array.from({ length: this.props.columns }, (el, index) => this.generateSection(index + 1))}
-          </div>
+      <table>
+          <td>
+            {this.printCards()}
+          </td>
+          <td>
             <CardCreator onCardAdd={this.props.onCardAdd}/>
-        </div>
+          </td>
+</table>
     );
   }
 }

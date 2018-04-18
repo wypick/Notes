@@ -3,6 +3,7 @@ import React from 'react';
 import './styles/App.less';
 
 import NotesStore from '../stores/NotesStore';
+import CardsStore from '../stores/CardsStore';
 import NotesActions from '../actions/NotesActions';
 import CardsActions from '../actions/CardsActions';
 
@@ -12,7 +13,9 @@ import CardsGrid from './CardsGrid.jsx';
 function getStateFromFlux() {
     return {
         isLoading: NotesStore.isLoading(),
-        notes: NotesStore.getNotes()
+        isLoading: CardsStore.isLoading(),
+        notes: NotesStore.getNotes(),
+        cards: CardsStore.getCards()
     };
 }
 
@@ -41,18 +44,25 @@ class App extends React.Component{
 
    componentWillMount() {
        NotesActions.loadNotes();
+       CardsActions.loadCards();
    }
 
    componentDidMount() {
        NotesStore.addChangeListener(this._onChange);
+       CardsStore.addChangeListener(this._onChange);
    }
 
    componentWillUnmount() {
        NotesStore.removeChangeListener(this._onChange);
+       CardsStore.removeChangeListener(this._onChange);
    }
 
    handleNoteDelete(note) {
        NotesActions.deleteNote(note.id);
+   }
+
+   handleCardDelete(card) {
+       CardsActions.deleteCard(card.id);
    }
 
    handleNoteAdd(noteData) {
@@ -71,8 +81,9 @@ class App extends React.Component{
 render() {
   return (
     <div className='App'>
-                <CardsGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete}
-                  moveSubject={this.moveSubject} onCardAdd={this.handleCardAdd} onNoteAdd={this.handleNoteAdd}/>
+                <CardsGrid notes={this.state.notes} cards={this.state.cards} onNoteDelete={this.handleNoteDelete}
+                  onCardDelete={this.handleCardDelete} moveSubject={this.moveSubject} onCardAdd={this.handleCardAdd}
+                  onNoteAdd={this.handleNoteAdd}/>
             </div>
   );
 }

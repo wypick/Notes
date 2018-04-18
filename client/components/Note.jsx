@@ -38,10 +38,8 @@ class Note extends React.Component{
 
 render() {
   const { connectDragSource, isDragging, index, data} = this.props;
-  const style = { backgroundColor: this.props.color };
-
         return connectDragSource(
-            <div className='Note' style={style}  onClick={this.onTooltipClick}>
+            <div className='Note' onClick={this.onTooltipClick}>
                 <span className='Note__del-icon' onClick={this.props.onDelete}> × </span>
                 {
                     this.props.title

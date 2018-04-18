@@ -2,8 +2,9 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 
 import NoteEditor from './NoteEditor.jsx';
+import './styles/Note.less';
 import Note from './Note.jsx';
-
+import './styles/Card.less';
 
 import propTypes from 'prop-types';
 
@@ -46,12 +47,15 @@ class Card extends React.Component {
  }
 
 render() {
-  const { connectDropTarget, isOver, xPos, yPos } = this.props;
+  const { connectDropTarget, isOver, xPos, yPos, card } = this.props;
       return connectDropTarget(
-          <div >
-              <h1>Card</h1>
+          <div className='Card'>
+              <h1>{this.props.name}
+                <button onClick={this.props.onCardDelete}> × </button>
+              </h1>
               {this.printNotes()}
-               <NoteEditor onNoteAdd={this.props.onNoteAdd}/>
+               <NoteEditor onNoteAdd={this.props.onNoteAdd} card={this.props.card}/>
+             {console.log(this.props.card)}
           </div>
       );
 }

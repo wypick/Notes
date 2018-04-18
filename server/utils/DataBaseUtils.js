@@ -22,6 +22,7 @@ var pos = 0;
 
 export function createNote(data) {
     const note = new Note({
+      card: data.card,
         text: data.text,
         color: data.color,
         createdAt: new Date(),
@@ -41,6 +42,10 @@ export function createCard(data) {
 
 export function deleteNote(id) {
     return Note.findById(id).remove();
+}
+
+export function deleteCard(id) {
+    return Card.findById(id).remove();
 }
 
 /*export function updateNote(id) {

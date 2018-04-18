@@ -8,7 +8,6 @@ const NoteSchema = new Schema({
         ref: 'Card'
     },
     text      : { type: String, required: true },
-    color     : { type: String },
     createdAt : { type: Date },
     number: { type: String }
 });

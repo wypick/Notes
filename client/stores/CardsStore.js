@@ -5,17 +5,15 @@ import AppConstants from '../constants/AppConstants';
 
 const CHANGE_EVENT = 'change';
 
-let _notes = [];
+let _cards = [];
 let _loadingError = null;
 let _isLoading = true;
 
-function formatNote(note) {
+function formatCard(card) {
     return {
-        id: note._id,
-        card: note.card,
-        number: note.number,
-        text: note.text,
-        createdAt: note.createdAt
+        id: card._id,
+        name: card.name,
+        createdAt: card.createdAt
     };
 }
 
@@ -24,8 +22,8 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
         return _isLoading;
     },
 
-    getNotes() {
-        return _notes;
+    getCards() {
+        return _cards;
     },
 
     emitChange() {
@@ -43,23 +41,23 @@ const TasksStore = Object.assign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function(action) {
     switch(action.type) {
-        case AppConstants.LOAD_NOTES_REQUEST: {
+        case AppConstants.LOAD_CARDS_REQUEST: {
             _isLoading = true;
 
             TasksStore.emitChange();
             break;
         }
 
-        case AppConstants.LOAD_NOTES_SUCCESS: {
+        case AppConstants.LOAD_CARDS_SUCCESS: {
             _isLoading = false;
-            _notes = action.notes.map( formatNote );
+            _cards = action.cards.map( formatCard );
             _loadingError = null;
 
             TasksStore.emitChange();
             break;
         }
 
-        case AppConstants.LOAD_NOTES_FAIL: {
+        case AppConstants.LOAD_CARDS_FAIL: {
             _loadingError = action.error;
 
             TasksStore.emitChange();

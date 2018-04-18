@@ -4,21 +4,21 @@ import Constants from '../constants/AppConstants';
 import api from '../api';
 
 const CardActions = {
-    loadNotes() {
+    loadCards() {
         AppDispatcher.dispatch({
-            type: Constants.LOAD_NOTES_REQUEST
+            type: Constants.LOAD_CARDS_REQUEST
         });
 
-        api.listNotes()
+        api.listCards()
         .then(({ data }) =>
             AppDispatcher.dispatch({
-                type: Constants.LOAD_NOTES_SUCCESS,
-                notes: data
+                type: Constants.LOAD_CARDS_SUCCESS,
+                cards: data
             })
         )
         .catch(err =>
             AppDispatcher.dispatch({
-                type: Constants.LOAD_NOTES_FAIL,
+                type: Constants.LOAD_CARDS_FAIL,
                 error: err
             })
         );
@@ -27,12 +27,22 @@ const CardActions = {
     createCard(card) {
         api.createCard(card)
         .then(() =>
-            this.loadNotes()
+            this.loadCards()
         )
         .catch(err =>
             console.error(err)
         );
     },
+
+    deleteCard(cardId) {
+        api.deleteCard(cardId)
+        .then(() =>
+            this.loadCards()
+        )
+        .catch(err =>
+            console.error(err)
+        );
+    }
 };
 
 export default CardActions;

@@ -17,6 +17,7 @@ app.use( bodyParser.json() );
 
 app.use(cors({ origin: '*' }));
 // RESTful api handlers
+
 app.get('/notes', (req, res) => {
     db.listNotes().then(data => res.send(data));
 });
@@ -28,12 +29,17 @@ app.get('/cards', (req, res) => {
 app.post('/notes', (req, res) => {
     db.createNote(req.body).then(data => res.send(data));
 });
+
 app.post('/cards', (req, res) => {
     db.createCard(req.body).then(data => res.send(data));
 });
 
 app.delete('/notes/:id', (req, res) => {
     db.deleteNote(req.params.id).then(data => res.send(data));
+});
+
+app.delete('/cards/:id', (req, res) => {
+    db.deleteCard(req.params.id).then(data => res.send(data));
 });
 
 const server = app.listen(serverPort, function() {

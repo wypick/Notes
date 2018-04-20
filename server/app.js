@@ -47,5 +47,9 @@ const server = app.listen(serverPort, function() {
 });
 
 app.patch('/notes/:id', (req, res) => {
-    db.updateNote(req.params.id).then(data => res.send(data));
+    db.updateNote(req.params.id, req.body).then(data => res.send(data));
+});
+
+app.patch('/cards/:id', (req, res) => {
+    db.updateCard(req.params.id, req.body).then(data => res.send(data));
 });

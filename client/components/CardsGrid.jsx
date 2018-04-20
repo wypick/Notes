@@ -35,7 +35,8 @@ render() {
             onCardDelete={this.props.onCardDelete}
             onCardAdd={this.props.onCardAdd}
             onNoteAdd={this.props.onNoteAdd}
-            onNoteEdit={this.props.onNoteEdit}/>
+            onNoteEdit={this.props.onNoteEdit}
+            onCardEdit={this.props.onCardEdit}/>
     </div>
       );
 }

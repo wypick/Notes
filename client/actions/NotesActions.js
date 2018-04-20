@@ -42,6 +42,16 @@ const NoteActions = {
         .catch(err =>
             console.error(err)
         );
+    },
+
+    updateNote(noteId, node) {
+        api.updateNote(noteId, node)
+        .then(() =>
+            this.loadNotes()
+        )
+        .catch(err =>
+            console.error(err)
+        );
     }
 };
 

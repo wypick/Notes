@@ -25,5 +25,11 @@ export default {
 
     deleteCard(cardId) {
         return axios.delete(`${apiPrefix}/cards/${cardId}`);
-    }
+    },
+    updateNote(noteId, data) {
+        return axios.patch(`${apiPrefix}/notes/${noteId}`, data);
+    },
+    updateCard(cardId, data) {
+        return axios.patch(`${apiPrefix}/cards/${cardId}`, data);
+    },
 }

@@ -42,6 +42,16 @@ const CardActions = {
         .catch(err =>
             console.error(err)
         );
+    },
+
+    updateCard(cardId, card) {
+        api.updateCard(cardId, card)
+        .then(() =>
+            this.loadCards()
+        )
+        .catch(err =>
+            console.error(err)
+        );
     }
 };
 

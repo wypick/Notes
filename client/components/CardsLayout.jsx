@@ -52,6 +52,7 @@ class CardsLayout extends Component {
        onCardDelete={this.props.onCardDelete.bind(null, card)}
        onCardAdd={this.props.onCardAdd}
        onNoteAdd={this.props.onNoteAdd}
+       onEdit={this.props.onCardEdit}
        onNoteEdit={this.props.onNoteEdit}/>
    </td>
        );

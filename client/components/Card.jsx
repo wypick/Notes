@@ -43,7 +43,10 @@ class Card extends React.Component {
       this.setState({
         edit: false
       });
-      this.props.onEdit(this.state.txt);
+      const editCard = {
+          name: this.state.txt,
+      };
+      this.props.onEdit(this.props.card, editCard);
     }
     update(e){
       this.setState({
@@ -54,9 +57,11 @@ class Card extends React.Component {
 
     change() {
       return (
-        <div className='Note' onClick={this.onTooltipClick}>
+        <div className='Card' onClick={this.onTooltipClick}>
         <input type='text' defaultValue={this.state.txt} onChange = {this.update}/>
         <button onClick={this.save}>Save</button>
+          {this.printNotes()}
+           <NoteEditor onNoteAdd={this.props.onNoteAdd} card={this.props.card}/>
         </div>
       );
     }
@@ -67,7 +72,7 @@ class Card extends React.Component {
               <div className='Card'>
                   <h1>{this.props.name}
                     <button onClick={this.props.onCardDelete}> × </button>
-                    <button onClick={this.props.onCardDelete}> ✏  </button>
+                    <button onClick={this.edit}> ✏  </button>
                   </h1>
                   {this.printNotes()}
                    <NoteEditor onNoteAdd={this.props.onNoteAdd} card={this.props.card}/>
@@ -80,11 +85,12 @@ class Card extends React.Component {
     if (this.props.card==note.card){
       return (
         <Note
-            key={note._id}
-           moveSubject={this.props.moveSubject}
+            key={note.id}
+            id={note.id}
+            moveSubject={this.props.moveSubject}
             text={note.text}
             onDelete={this.props.onNoteDelete.bind(null, note)}
-            onEdit={this.props.onNoteEdit.bind(null, note)}
+            onEdit={this.props.onNoteEdit}
             color={note.color}
             index={index}
             sectionData={sectionData}

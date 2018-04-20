@@ -48,7 +48,10 @@ class Note extends React.Component{
     this.setState({
       edit: false
     });
-    this.props.onEdit(this.state.txt);
+    const editNote = {
+        text: this.state.txt,
+    };
+    this.props.onEdit(this.props.id, editNote);
   }
 
   onTooltipClick(event) {

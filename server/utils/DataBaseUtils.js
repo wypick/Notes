@@ -26,7 +26,7 @@ export function createNote(data) {
         text: data.text,
         color: data.color,
         createdAt: new Date(),
-        number: pos
+        number: data.number
     });
     pos++;
     return note.save();

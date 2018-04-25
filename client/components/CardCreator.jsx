@@ -10,7 +10,7 @@ class CardCreator extends React.Component {
       this.handleTextChange = this.handleTextChange.bind(this);
       this.handleTitleChange = this.handleTitleChange.bind(this);
     }
-
+    
     handleTextChange(event) {
         this.setState({ text: event.target.value });
     }

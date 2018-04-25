@@ -31,7 +31,10 @@ class Card extends React.Component {
     this.edit = this.edit.bind(this);
     this.save = this.save.bind(this);
     this.update = this.update.bind(this);
+    this.abc = this.abc.bind(this);
+    this.pos = 0;
     }
+  
 
     edit() {
       this.setState({
@@ -48,6 +51,7 @@ class Card extends React.Component {
       };
       this.props.onEdit(this.props.card, editCard);
     }
+
     update(e){
       this.setState({
         txt: e.target.value
@@ -75,14 +79,16 @@ class Card extends React.Component {
                     <button onClick={this.edit}> ✏  </button>
                   </h1>
                   {this.printNotes()}
-                   <NoteEditor onNoteAdd={this.props.onNoteAdd} card={this.props.card}/>
+                   <NoteEditor onNoteAdd={this.props.onNoteAdd} number={this.pos} card={this.props.card}/>
               </div>
           );
     }
 
-
   abc(note, index, sectionData){
     if (this.props.card==note.card){
+      this.pos = note.number;
+      this.pos++;
+            console.log(this.pos);
       return (
         <Note
             key={note.id}
